@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-
 package griffon.pivot.support.adapters;
 
 import groovy.lang.Closure;
-import org.apache.pivot.collections.Sequence;
-import org.apache.pivot.wtk.Component;
-import org.apache.pivot.wtk.Window;
-import org.apache.pivot.wtk.WindowListener;
-import org.apache.pivot.wtk.media.Image;
-
-import static groovy.lang.Closure.DELEGATE_FIRST;
 
 /**
  * @author Andres Almiray
  */
-public class WindowAdapter implements WindowListener {
+public class WindowAdapter implements GriffonPivotAdapter, org.apache.pivot.wtk.WindowListener {
     private Closure titleChanged;
     private Closure iconAdded;
     private Closure iconInserted;
@@ -38,11 +30,40 @@ public class WindowAdapter implements WindowListener {
     private Closure activeChanged;
     private Closure maximizedChanged;
 
+    public Closure getTitleChanged() {
+        return this.titleChanged;
+    }
+
+    public Closure getIconAdded() {
+        return this.iconAdded;
+    }
+
+    public Closure getIconInserted() {
+        return this.iconInserted;
+    }
+
+    public Closure getIconsRemoved() {
+        return this.iconsRemoved;
+    }
+
+    public Closure getContentChanged() {
+        return this.contentChanged;
+    }
+
+    public Closure getActiveChanged() {
+        return this.activeChanged;
+    }
+
+    public Closure getMaximizedChanged() {
+        return this.maximizedChanged;
+    }
+
+
     public void setTitleChanged(Closure titleChanged) {
         this.titleChanged = titleChanged;
         if (this.titleChanged != null) {
             this.titleChanged.setDelegate(this);
-            this.titleChanged.setResolveStrategy(DELEGATE_FIRST);
+            this.titleChanged.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -50,7 +71,7 @@ public class WindowAdapter implements WindowListener {
         this.iconAdded = iconAdded;
         if (this.iconAdded != null) {
             this.iconAdded.setDelegate(this);
-            this.iconAdded.setResolveStrategy(DELEGATE_FIRST);
+            this.iconAdded.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -58,7 +79,7 @@ public class WindowAdapter implements WindowListener {
         this.iconInserted = iconInserted;
         if (this.iconInserted != null) {
             this.iconInserted.setDelegate(this);
-            this.iconInserted.setResolveStrategy(DELEGATE_FIRST);
+            this.iconInserted.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -66,7 +87,7 @@ public class WindowAdapter implements WindowListener {
         this.iconsRemoved = iconsRemoved;
         if (this.iconsRemoved != null) {
             this.iconsRemoved.setDelegate(this);
-            this.iconsRemoved.setResolveStrategy(DELEGATE_FIRST);
+            this.iconsRemoved.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -74,7 +95,7 @@ public class WindowAdapter implements WindowListener {
         this.contentChanged = contentChanged;
         if (this.contentChanged != null) {
             this.contentChanged.setDelegate(this);
-            this.contentChanged.setResolveStrategy(DELEGATE_FIRST);
+            this.contentChanged.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -82,7 +103,7 @@ public class WindowAdapter implements WindowListener {
         this.activeChanged = activeChanged;
         if (this.activeChanged != null) {
             this.activeChanged.setDelegate(this);
-            this.activeChanged.setResolveStrategy(DELEGATE_FIRST);
+            this.activeChanged.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -90,49 +111,51 @@ public class WindowAdapter implements WindowListener {
         this.maximizedChanged = maximizedChanged;
         if (this.maximizedChanged != null) {
             this.maximizedChanged.setDelegate(this);
-            this.maximizedChanged.setResolveStrategy(DELEGATE_FIRST);
+            this.maximizedChanged.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
-    public void titleChanged(Window arg0, String arg1) {
+
+    public void titleChanged(org.apache.pivot.wtk.Window arg0, java.lang.String arg1) {
         if (titleChanged != null) {
             titleChanged.call(arg0, arg1);
         }
     }
 
-    public void iconAdded(Window arg0, Image arg1) {
+    public void iconAdded(org.apache.pivot.wtk.Window arg0, org.apache.pivot.wtk.media.Image arg1) {
         if (iconAdded != null) {
             iconAdded.call(arg0, arg1);
         }
     }
 
-    public void iconInserted(Window arg0, Image arg1, int arg2) {
+    public void iconInserted(org.apache.pivot.wtk.Window arg0, org.apache.pivot.wtk.media.Image arg1, int arg2) {
         if (iconInserted != null) {
             iconInserted.call(arg0, arg1, arg2);
         }
     }
 
-    public void iconsRemoved(Window arg0, int arg1, Sequence<Image> arg2) {
+    public void iconsRemoved(org.apache.pivot.wtk.Window arg0, int arg1, org.apache.pivot.collections.Sequence arg2) {
         if (iconsRemoved != null) {
             iconsRemoved.call(arg0, arg1, arg2);
         }
     }
 
-    public void contentChanged(Window arg0, Component arg1) {
+    public void contentChanged(org.apache.pivot.wtk.Window arg0, org.apache.pivot.wtk.Component arg1) {
         if (contentChanged != null) {
             contentChanged.call(arg0, arg1);
         }
     }
 
-    public void activeChanged(Window arg0, Window arg1) {
+    public void activeChanged(org.apache.pivot.wtk.Window arg0, org.apache.pivot.wtk.Window arg1) {
         if (activeChanged != null) {
             activeChanged.call(arg0, arg1);
         }
     }
 
-    public void maximizedChanged(Window arg0) {
-        if (titleChanged != null) {
-            titleChanged.call(arg0);
+    public void maximizedChanged(org.apache.pivot.wtk.Window arg0) {
+        if (maximizedChanged != null) {
+            maximizedChanged.call(arg0);
         }
     }
+
 }

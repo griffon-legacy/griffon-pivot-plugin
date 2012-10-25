@@ -1,0 +1,5 @@
+java.awt.Color = griffon.pivot.editors.ColorPropertyEditor
+org.apache.pivot.wtk.Bounds = griffon.pivot.editors.BoundsPropertyEditor
+org.apache.pivot.wtk.Dimensions = griffon.pivot.editors.DimensionsPropertyEditor
+org.apache.pivot.wtk.Insets = griffon.pivot.editors.InsetsPropertyEditor
+org.apache.pivot.wtk.Point = griffon.pivot.editors.PointPropertyEditor

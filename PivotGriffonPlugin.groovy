@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class PivotGriffonPlugin {
-    String version = '0.1-SNAPSHOT'
-    String griffonVersion = '0.9.6 > *'
+    String version = '1.0.0'
+    String griffonVersion = '1.1.0 > *'
     Map dependsOn = [:]
     List pluginIncludes = []
     String license = 'Apache Software License 2.0'

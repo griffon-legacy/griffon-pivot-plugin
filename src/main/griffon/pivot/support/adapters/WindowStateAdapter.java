@@ -14,66 +14,51 @@
  * limitations under the License.
  */
 
-
 package griffon.pivot.support.adapters;
 
 import groovy.lang.Closure;
-import org.apache.pivot.util.Vote;
-import org.apache.pivot.wtk.Display;
-import org.apache.pivot.wtk.Window;
-import org.apache.pivot.wtk.WindowStateListener;
-
-import static groovy.lang.Closure.DELEGATE_FIRST;
-import static org.apache.pivot.util.Vote.APPROVE;
 
 /**
  * @author Andres Almiray
  */
-public class WindowStateAdapter implements WindowStateListener {
+public class WindowStateAdapter implements GriffonPivotAdapter, org.apache.pivot.wtk.WindowStateListener {
     private Closure windowOpened;
-    private Closure previewWindowClose;
-    private Closure previewWindowOpen;
-    private Closure windowCloseVetoed;
-    private Closure windowOpenVetoed;
     private Closure windowClosed;
+    private Closure previewWindowOpen;
+    private Closure windowOpenVetoed;
+    private Closure previewWindowClose;
+    private Closure windowCloseVetoed;
+
+    public Closure getWindowOpened() {
+        return this.windowOpened;
+    }
+
+    public Closure getWindowClosed() {
+        return this.windowClosed;
+    }
+
+    public Closure getPreviewWindowOpen() {
+        return this.previewWindowOpen;
+    }
+
+    public Closure getWindowOpenVetoed() {
+        return this.windowOpenVetoed;
+    }
+
+    public Closure getPreviewWindowClose() {
+        return this.previewWindowClose;
+    }
+
+    public Closure getWindowCloseVetoed() {
+        return this.windowCloseVetoed;
+    }
+
 
     public void setWindowOpened(Closure windowOpened) {
         this.windowOpened = windowOpened;
         if (this.windowOpened != null) {
             this.windowOpened.setDelegate(this);
-            this.windowOpened.setResolveStrategy(DELEGATE_FIRST);
-        }
-    }
-
-    public void setPreviewWindowClose(Closure previewWindowClose) {
-        this.previewWindowClose = previewWindowClose;
-        if (this.previewWindowClose != null) {
-            this.previewWindowClose.setDelegate(this);
-            this.previewWindowClose.setResolveStrategy(DELEGATE_FIRST);
-        }
-    }
-
-    public void setPreviewWindowOpen(Closure previewWindowOpen) {
-        this.previewWindowOpen = previewWindowOpen;
-        if (this.previewWindowOpen != null) {
-            this.previewWindowOpen.setDelegate(this);
-            this.previewWindowOpen.setResolveStrategy(DELEGATE_FIRST);
-        }
-    }
-
-    public void setWindowCloseVetoed(Closure windowCloseVetoed) {
-        this.windowCloseVetoed = windowCloseVetoed;
-        if (this.windowCloseVetoed != null) {
-            this.windowCloseVetoed.setDelegate(this);
-            this.windowCloseVetoed.setResolveStrategy(DELEGATE_FIRST);
-        }
-    }
-
-    public void setWindowOpenVetoed(Closure windowOpenVetoed) {
-        this.windowOpenVetoed = windowOpenVetoed;
-        if (this.windowOpenVetoed != null) {
-            this.windowOpenVetoed.setDelegate(this);
-            this.windowOpenVetoed.setResolveStrategy(DELEGATE_FIRST);
+            this.windowOpened.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
@@ -81,45 +66,79 @@ public class WindowStateAdapter implements WindowStateListener {
         this.windowClosed = windowClosed;
         if (this.windowClosed != null) {
             this.windowClosed.setDelegate(this);
-            this.windowClosed.setResolveStrategy(DELEGATE_FIRST);
+            this.windowClosed.setResolveStrategy(Closure.DELEGATE_FIRST);
         }
     }
 
-    public void windowOpened(Window arg0) {
+    public void setPreviewWindowOpen(Closure previewWindowOpen) {
+        this.previewWindowOpen = previewWindowOpen;
+        if (this.previewWindowOpen != null) {
+            this.previewWindowOpen.setDelegate(this);
+            this.previewWindowOpen.setResolveStrategy(Closure.DELEGATE_FIRST);
+        }
+    }
+
+    public void setWindowOpenVetoed(Closure windowOpenVetoed) {
+        this.windowOpenVetoed = windowOpenVetoed;
+        if (this.windowOpenVetoed != null) {
+            this.windowOpenVetoed.setDelegate(this);
+            this.windowOpenVetoed.setResolveStrategy(Closure.DELEGATE_FIRST);
+        }
+    }
+
+    public void setPreviewWindowClose(Closure previewWindowClose) {
+        this.previewWindowClose = previewWindowClose;
+        if (this.previewWindowClose != null) {
+            this.previewWindowClose.setDelegate(this);
+            this.previewWindowClose.setResolveStrategy(Closure.DELEGATE_FIRST);
+        }
+    }
+
+    public void setWindowCloseVetoed(Closure windowCloseVetoed) {
+        this.windowCloseVetoed = windowCloseVetoed;
+        if (this.windowCloseVetoed != null) {
+            this.windowCloseVetoed.setDelegate(this);
+            this.windowCloseVetoed.setResolveStrategy(Closure.DELEGATE_FIRST);
+        }
+    }
+
+
+    public void windowOpened(org.apache.pivot.wtk.Window arg0) {
         if (windowOpened != null) {
             windowOpened.call(arg0);
         }
     }
 
-    public Vote previewWindowClose(Window arg0) {
-        if (previewWindowClose != null) {
-            return (Vote) previewWindowClose.call(arg0);
+    public void windowClosed(org.apache.pivot.wtk.Window arg0, org.apache.pivot.wtk.Display arg1, org.apache.pivot.wtk.Window arg2) {
+        if (windowClosed != null) {
+            windowClosed.call(arg0, arg1, arg2);
         }
-        return APPROVE;
     }
 
-    public Vote previewWindowOpen(Window arg0) {
+    public org.apache.pivot.util.Vote previewWindowOpen(org.apache.pivot.wtk.Window arg0) {
         if (previewWindowOpen != null) {
-            return (Vote) previewWindowOpen.call(arg0);
+            return (org.apache.pivot.util.Vote) previewWindowOpen.call(arg0);
         }
-        return APPROVE;
+        return org.apache.pivot.util.Vote.APPROVE;
     }
 
-    public void windowCloseVetoed(Window arg0, Vote arg1) {
-        if (windowCloseVetoed != null) {
-            windowCloseVetoed.call(arg0, arg1);
-        }
-    }
-
-    public void windowOpenVetoed(Window arg0, Vote arg1) {
+    public void windowOpenVetoed(org.apache.pivot.wtk.Window arg0, org.apache.pivot.util.Vote arg1) {
         if (windowOpenVetoed != null) {
             windowOpenVetoed.call(arg0, arg1);
         }
     }
 
-    public void windowClosed(Window arg0, Display arg1, Window arg2) {
-        if (windowClosed != null) {
-            windowClosed.call(arg0, arg1, arg2);
+    public org.apache.pivot.util.Vote previewWindowClose(org.apache.pivot.wtk.Window arg0) {
+        if (previewWindowClose != null) {
+            return (org.apache.pivot.util.Vote) previewWindowClose.call(arg0);
+        }
+        return org.apache.pivot.util.Vote.APPROVE;
+    }
+
+    public void windowCloseVetoed(org.apache.pivot.wtk.Window arg0, org.apache.pivot.util.Vote arg1) {
+        if (windowCloseVetoed != null) {
+            windowCloseVetoed.call(arg0, arg1);
         }
     }
+
 }

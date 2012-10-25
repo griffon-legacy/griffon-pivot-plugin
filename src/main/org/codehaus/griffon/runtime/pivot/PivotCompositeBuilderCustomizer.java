@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Swing based implementation of the <code>CompositeBuilderCustomizer</code> interface.
+ * Pivot based implementation of the <code>CompositeBuilderCustomizer</code> interface.
  *
  * @author Andres Almiray
  */
@@ -35,7 +35,7 @@ public class PivotCompositeBuilderCustomizer extends DefaultCompositeBuilderCust
     public void registerBeanFactory(FactoryBuilderSupport builder, String name, String groupName, Class<?> beanClass) {
         if (Component.class.isAssignableFrom(beanClass)) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Registering " + name + " with " + beanClass + " using QLayoutFactory");
+                LOG.debug("Registering " + name + " with " + beanClass + " using ComponentFactory");
             }
             builder.registerFactory(name, groupName, new ComponentFactory(beanClass));
         }

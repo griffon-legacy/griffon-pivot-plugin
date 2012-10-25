@@ -18,7 +18,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        String pivotVersion = '2.0.1'
+        String pivotVersion = '2.0.2'
         compile "org.apache.pivot:pivot-core:$pivotVersion",
                 "org.apache.pivot:pivot-charts:$pivotVersion",
                 "org.apache.pivot:pivot-wtk:$pivotVersion",
