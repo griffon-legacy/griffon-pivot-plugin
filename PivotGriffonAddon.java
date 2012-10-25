@@ -104,7 +104,6 @@ public class PivotGriffonAddon extends AbstractGriffonAddon {
         registerFactory("listButtonDataRenderer", new ButtonDataRendererFactory(ListButtonDataRenderer.class));
         registerFactory("menuButtonDataRenderer", new ButtonDataRendererFactory(MenuButtonDataRenderer.class));
         registerFactory("buttonDataRenderer", new ButtonDataRendererFactory(ButtonDataRenderer.class));
-        registerFactory("buttonDataRenderer", new ButtonDataRendererFactory(ButtonDataRenderer.class));
 
         // -- menus
         registerFactory("menu", new MenuFactory());
@@ -117,7 +116,7 @@ public class PivotGriffonAddon extends AbstractGriffonAddon {
 
         // -- panes
         Factory hbox = new BoxPaneFactory(Orientation.HORIZONTAL);
-        registerFactory("boxPane", hbox);
+        registerFactory("box", hbox);
         registerFactory("hbox", hbox);
         registerFactory("vbox", new BoxPaneFactory(Orientation.VERTICAL));
         registerPivotContainerFactory("boxPane", BoxPane.class);

@@ -4,6 +4,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import org.apache.pivot.wtk.Bounds
+
 import java.beans.PropertyEditor
 
 @Unroll
@@ -50,17 +51,17 @@ class BoundsPropertyEditorSpec extends Specification {
 
         where:
         format << [
-                '',
-                '   ',
-                'garbage',
-                '1, 2, 3',
-                '1, 2, 3, 4, 5',
-                [],
-                [1, 2, 3],
-                [1, 2, 3, 4, 5],
-                [x: 'a'],
-                [y: 'b'],
-                new Object()
+            '',
+            '   ',
+            'garbage',
+            '1, 2, 3',
+            '1, 2, 3, 4, 5',
+            [],
+            [1, 2, 3],
+            [1, 2, 3, 4, 5],
+            [x: 'a'],
+            [y: 'b'],
+            new Object()
         ]
     }
 }
