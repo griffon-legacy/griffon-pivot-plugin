@@ -38,6 +38,10 @@ class PivotGriffonPlugin {
     String description = '''
 Enables Apache [Pivot][1] as UI toolkit.
 
+Apache Pivot is an open-source platform for building installable Internet applications (IIAs).
+It combines the enhanced productivity and usability features of a modern user interface toolkit
+with the robustness of the Java platform.
+
 Usage
 ----
 TBD
